@@ -68,7 +68,7 @@ func RunServer(ctx context.Context) {
 			AllowedOrigins:         allowed,
 			AllowCredentials:       true,
 			AllowOriginRequestFunc: nil,
-			Debug:                  opts.Debug,
+			Debug: opts.Debug,
 		}),
 
 		gzip.Gzip(gzip.DefaultCompression),
@@ -83,9 +83,9 @@ func RunServer(ctx context.Context) {
 		Server: &http.Server{
 			Addr:              fmt.Sprintf(":%d", opts.Port),
 			Handler:           middleware,
-			ReadTimeout:       1 * time.Second,
-			WriteTimeout:      1 * time.Second,
-			ReadHeaderTimeout: 1 * time.Second,
+			ReadTimeout:       5 * time.Second,
+			WriteTimeout:      30 * time.Second,
+			ReadHeaderTimeout: 5 * time.Second,
 			MaxHeaderBytes:    1 << 20,
 		},
 	}
